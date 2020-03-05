@@ -10,7 +10,11 @@
     <div id="app">
         <h1>{{titulo}}</h1>
 
-        <ul v-for="fruta in frutas" >
+        <input type="text" v-model="nuevaFruta" />
+        <button v-on:click="agregarFruta">Agregar</button>
+        <button @click="agregarFruta">Agregar</button>
+
+        <ul v-for="fruta in frutas">
             <li v-if="fruta.cantidad !== 0">
                 {{fruta.cantidad}} - {{fruta.nombre}}</li>
             <li v-else> Sin Stock</li>
