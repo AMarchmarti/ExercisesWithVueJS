@@ -9,6 +9,12 @@
 <body>
     <div id="app">
         <h1>{{titulo}}</h1>
+
+        <ul v-for="fruta in frutas" >
+            <li v-if="fruta.cantidad !== 0">
+                {{fruta.cantidad}} - {{fruta.nombre}}</li>
+            <li v-else> Sin Stock</li>
+        </ul>
     </div>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
