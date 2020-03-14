@@ -1,16 +1,27 @@
 <template>
   <div>
     <h1>Lista de Tareas</h1>
-    <router-link :to="{ name: 'add' }">
-      <button>Add</button>
+    <router-link :to="{ name: 'add' }" class="btn btn-success btn-block">
+      Add
     </router-link>
-    <ul>
-      <li v-for="task of tasks" :key="task.id">
+    <ul class="list-group mt-5">
+      <li
+        class="list-group-item d-flex justify-content-between"
+        v-for="task of tasks"
+        :key="task.id"
+      >
         {{ task.id }} - {{ task.nombre }}
-        <router-link :to="{ name: 'edit', params: { id: task.id } }">
-          <button>Edit</button>
-        </router-link>
-        <button @click="deleteTask(task.id)">Delete</button>
+        <div>
+          <router-link
+            class="btn btn-warning btn-sm mr-2"
+            :to="{ name: 'edit', params: { id: task.id } }"
+          >
+            Edit
+          </router-link>
+          <button @click="deleteTask(task.id)" class="btn btn-danger btn-sm">
+            Delete
+          </button>
+        </div>
       </li>
     </ul>
   </div>

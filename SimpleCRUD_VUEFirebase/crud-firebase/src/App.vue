@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="nav">
+  <div id="app" class="container">
+    <div id="nav" class="text-center">
       <router-link :to="{ name: 'start' }">
         <img src="@/assets/logo.png" alt="logo" />
       </router-link>
