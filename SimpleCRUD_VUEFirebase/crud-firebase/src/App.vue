@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <img src="@/assets/logo.png" alt="logo">
+      <router-link :to="{ name: 'start' }">
+        <img src="@/assets/logo.png" alt="logo" />
+      </router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
-
-

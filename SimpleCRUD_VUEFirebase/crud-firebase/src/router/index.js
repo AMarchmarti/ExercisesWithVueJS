@@ -6,9 +6,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/start',
+    path: '/',
     name: 'start',
     component: () => import(/* webpackChunkName: "about" */ '../views/Start.vue')
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Edit.vue')
   }
 ]
 

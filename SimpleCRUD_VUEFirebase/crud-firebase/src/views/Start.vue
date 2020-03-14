@@ -4,6 +4,9 @@
     <ul>
       <li v-for="task of tasks" :key="task.id">
         {{ task.id }} - {{ task.nombre }}
+        <router-link :to="{ name: 'edit', params: { id: task.id } }">
+          <button>Edit</button>
+        </router-link>
       </li>
     </ul>
   </div>
