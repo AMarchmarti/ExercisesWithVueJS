@@ -4,7 +4,7 @@
     {{ id }} - {{ task }}
     <form @submit.prevent="editTask(task)">
       <input type="text" v-model="task.nombre" />
-      <button>Edit</button>
+      <button type="submit">Edit</button>
     </form>
   </div>
 </template>
