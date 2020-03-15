@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router";
 var firebase = require("firebase/app");
 Vue.use(Vuex);
 
@@ -26,9 +27,25 @@ export default new Vuex.Store({
             email: response.user.email,
             uid: response.user.uid
           });
+          router.push({ name: "start" });
         })
         .catch(error => {
           console.log("error :", error);
+          commit("setError", error.message);
+        });
+    },
+    loginUser({ commit }, payload) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then( res => {
+          commit("setUser", {
+            email: res.user.email,
+            uid: res.user.uid
+          });
+          router.push({ name: "start" });
+        })
+        .catch(error => {
           commit("setError", error.message);
         });
     }

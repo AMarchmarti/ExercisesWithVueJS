@@ -5,7 +5,7 @@
       <input type="email" v-model="email" />
       <input type="password" v-model="password" />
       <input type="password" v-model="confirmPassword" />
-      <button type="submit">Create User</button>
+      <button type="submit" :disabled="!disabled">Create User</button>
     </form>
     <p>{{ error }}</p>
   </div>
@@ -26,7 +26,10 @@ export default {
     ...mapActions(["createUser"])
   },
   computed: {
-    ...mapState(["error"])
+    ...mapState(["error"]),
+    disabled() {
+      return this.password === this.confirmPassword && this.password !== "";
+    }
   }
 };
 </script>
