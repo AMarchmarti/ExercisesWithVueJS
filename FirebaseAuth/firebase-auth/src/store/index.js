@@ -1,7 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router";
-var firebase = require("firebase/app");
+import db from "../main";
+import tasks from "./task";
+
+const firebase = require("firebase/app");
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -27,7 +31,11 @@ export default new Vuex.Store({
             email: response.user.email,
             uid: response.user.uid
           });
-          router.push({ name: "start" });
+          db.collection(response.user.email)
+            .add({
+              nombre: "Tarea de ejemplo"
+            })
+            .then(() => router.push({ name: "start" }));
         })
         .catch(error => {
           console.log("error :", error);
@@ -62,7 +70,9 @@ export default new Vuex.Store({
       router.push({ name: "login" });
     }
   },
-  modules: {},
+  modules: {
+    tasks
+  },
   getters: {
     existUser(state) {
       return !(!state.user || state.user === "");

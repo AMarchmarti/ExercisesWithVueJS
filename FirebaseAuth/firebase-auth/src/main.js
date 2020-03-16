@@ -22,7 +22,7 @@ const config = {
   measurementId: "G-1FJMDFRSZ7"
 };
 
-firebase.initializeApp(config);
+const firebaseApp = firebase.initializeApp(config);
 
 Vue.config.productionTip = false;
 
@@ -40,3 +40,4 @@ firebase.auth().onAuthStateChanged(user => {
   }).$mount("#app");
 });
 
+export default firebaseApp.firestore();
