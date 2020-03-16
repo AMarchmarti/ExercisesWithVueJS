@@ -1,22 +1,32 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{name: 'register'}">Registro</router-link> | 
-      <router-link :to="{name: 'start'}">Inicio</router-link> | 
-      <router-link :to="{name: 'login'}">Login</router-link> |
-      <a @click="logOut" >Logout</a>
+      <router-link :to="{ name: 'register' }" v-if="!existUser"
+        >Registro</router-link
+      >
+      |
+      <router-link :to="{ name: 'start' }" v-if="existUser"
+        >Inicio</router-link
+      >
+      |
+      <router-link :to="{ name: 'login' }" v-if="!existUser">Login</router-link>
+      |
+      <a @click="logOut" v-if="existUser">Logout</a>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'App',
+  name: "App",
   methods: {
-    ...mapActions(['logOut'])
+    ...mapActions(["logOut"])
   },
-}
+  computed: {
+    ...mapGetters(["existUser"])
+  }
+};
 </script>
 <style>
 #app {

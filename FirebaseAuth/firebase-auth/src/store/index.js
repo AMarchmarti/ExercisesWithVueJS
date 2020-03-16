@@ -50,17 +50,22 @@ export default new Vuex.Store({
         });
     },
     connectedUser({ commit }, payload) {
-      if( payload !== null){
+      if (payload !== null) {
         commit("setUser", { email: payload.email, uid: payload.uid });
-      }else{
-        commit('setUser', null)
+      } else {
+        commit("setUser", null);
       }
     },
     logOut({ commit }) {
       firebase.auth().signOut();
-      commit('setUser', null)
+      commit("setUser", null);
       router.push({ name: "login" });
     }
   },
-  modules: {}
+  modules: {},
+  getters: {
+    existUser(state) {
+      return !(!state.user || state.user === "");
+    }
+  }
 });
