@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
 var firebase = require("firebase/app");
 
@@ -11,8 +11,7 @@ require("firebase/auth");
 // require("firebase/messaging");
 // require("firebase/functions");
 
-
-const config= {
+const config = {
   apiKey: "AIzaSyCnD5w80EokvlQLfRYWzOExt_o_y0GfnLE",
   authDomain: "simplecrud-d777b.firebaseapp.com",
   databaseURL: "https://simplecrud-d777b.firebaseio.com",
@@ -25,10 +24,18 @@ const config= {
 
 firebase.initializeApp(config);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch("connectedUser", { email: user.email, uid: user.uid });
+  } else {
+    store.dispatch("connectedUser", null);
+  }
+});
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount("#app");

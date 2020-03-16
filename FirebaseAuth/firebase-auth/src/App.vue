@@ -3,12 +3,21 @@
     <div id="nav">
       <router-link :to="{name: 'register'}">Registro</router-link> | 
       <router-link :to="{name: 'start'}">Inicio</router-link> | 
-      <router-link :to="{name: 'login'}">Login</router-link> 
+      <router-link :to="{name: 'login'}">Login</router-link> |
+      <a @click="logOut" >Logout</a>
     </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+import {mapActions} from 'vuex'
+export default {
+  name: 'App',
+  methods: {
+    ...mapActions(['logOut'])
+  },
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
