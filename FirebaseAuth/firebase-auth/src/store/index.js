@@ -50,7 +50,11 @@ export default new Vuex.Store({
         });
     },
     connectedUser({ commit }, payload) {
-      commit("setUser", { email: payload.email, uid: payload.uid });
+      if( payload !== null){
+        commit("setUser", { email: payload.email, uid: payload.uid });
+      }else{
+        commit('setUser', null)
+      }
     },
     logOut({ commit }) {
       firebase.auth().signOut();

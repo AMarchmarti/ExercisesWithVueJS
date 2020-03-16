@@ -1,31 +1,45 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
+const firebase = require("firebase/app");
 
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/register',
-    name: 'register',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+    path: "/register",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Register.vue")
   },
   {
-    path: '/',
-    name: 'start',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Start.vue')
+    path: "/",
+    name: "start",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Start.vue"),
+    meta: { requiresAuth: true }
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Login.vue")
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const protectedRoute = to.matched.some(record => record.meta.requiresAuth); //boolean
+  const user = firebase.auth().currentUser;
+  if (protectedRoute && !user) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
+});
+
+export default router;
