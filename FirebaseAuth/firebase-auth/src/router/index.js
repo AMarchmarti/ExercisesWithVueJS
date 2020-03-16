@@ -27,14 +27,14 @@ const routes = [
   {
     path: "/add",
     name: "add",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Add.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/Add.vue"),
+    meta: { requiresAuth: true }
   },
   {
     path: "/edit/:id",
     name: "edit",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Edit.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/Edit.vue"),
+    meta: { requiresAuth: true }
   }
 ];
 

@@ -1,6 +1,7 @@
 import db from "../main";
+import router from "../router";
 const firebase = require("firebase/app");
-const user = firebase.auth().currentUser;
+
 export default {
   namespaced: true,
   state: {
@@ -26,6 +27,7 @@ export default {
   actions: {
     getTasks({ commit }) {
       const tasks = [];
+      const user = firebase.auth().currentUser;
       db.collection(user.email)
         .get()
         .then(docs => {
@@ -38,6 +40,7 @@ export default {
       commit("setTasks", tasks);
     },
     getTask({ commit }, id) {
+      const user = firebase.auth().currentUser;
       db.collection(user.email)
         .doc(id)
         .get()
@@ -58,6 +61,7 @@ export default {
         });
     },
     addTask({ commit }, task) {
+      const user = firebase.auth().currentUser;
       db.collection(user.email)
         .add({
           nombre: task.name
@@ -67,6 +71,7 @@ export default {
         });
     },
     deleteTask({ commit, dispatch }, id) {
+      const user = firebase.auth().currentUser;
       db.collection(user.email)
         .doc(id)
         .delete()
